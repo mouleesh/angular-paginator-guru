@@ -10,7 +10,7 @@ export class PaginatorComponent implements OnInit {
 
   @Input() itemsPerPage: number;
 
-  @Output() PageChangeEventEmitter: EventEmitter<any> = new EventEmitter();
+  @Output() PageChange: EventEmitter<any> = new EventEmitter();
 
   pageNumberArray: number[] = [];
 
@@ -23,7 +23,7 @@ export class PaginatorComponent implements OnInit {
   pageClick(pageNumber): void {
       if (pageNumber >= 1 && pageNumber <= this.totalPages) {
           this.currentPage = pageNumber;
-          this.PageChangeEventEmitter.emit(this.currentPage);
+          this.PageChange.emit(this.currentPage);
 
           let startValue = 1;
           let endValue = this.paginateFrameSize;

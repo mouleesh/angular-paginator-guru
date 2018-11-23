@@ -1,27 +1,55 @@
 # AngularPaginatorGuru
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.2.2.
+A simple and highly customizable plug-n-play package for pagination in Angular (v2+)
 
-## Development server
+## Quick Start
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+```sh
+$ npm install angular-paginator-guru
+```
 
-## Code scaffolding
+## Sample Implementation
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+```sh
+// app.module.ts
+import {NgModule} from '@angular/core';
+import {BrowserModule} from '@angular/platform-browser';
 
-## Build
+import {PaginatorModule} from 'angular-paginator-guru'; // <-- import the module
+import {MyComponent} from './my.component';
+ 
+@NgModule({
+    imports: [BrowserModule, PaginatorModule], // <-- include it in your app module
+    declarations: [MyComponent],
+    bootstrap: [MyComponent]
+})
+export class MyAppModule {}
+```
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+```sh
+// my.component.ts
+import {Component} from '@angular/core';
+ 
+@Component({
+    selector: 'my-component',
+    template: `
+    <ul>
+      <li *ngFor="let item of collection"> ... </li>
+    </ul>
+               
+    <app-paginator-guru 
+        (PageChange)="onPageChange($event)" 
+        totalItemsCount=90 
+        itemsPerPage=10>
+    </app-paginator-guru>
+    `
+})
+export class MyComponent {
+    collection: any[] = someArrayOfThings;  
+    
+    onPageChange(currentPage) {
+        // Fetch data based on currentPage and update collection
+        // console.log(currentPage)
+  }
+}
+```
